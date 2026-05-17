@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "MSI MAG A550BN 550W",
+    "price": 60,
+    "wattage": 550,
+    "type": "non modular",
+    "efficiency": 1,
+    "image": "images/psu/MSI MAG A550BN 550W.png",
+    "link": "https://www.amazon.com/s?k=MSI+MAG+A550BN+550W"
+  },
+  {
+    "id": 2,
+    "name": "Corsair CX650 650W",
+    "price": 75,
+    "wattage": 650,
+    "type": "non modular",
+    "efficiency": 1,
+    "image": "images/psu/Corsair CX650 650W.png",
+    "link": "https://www.amazon.com/s?k=Corsair+CX650+650W"
+  },
+  {
+    "id": 3,
+    "name": "be quiet! Pure Power 13M 650W",
+    "price": 100,
+    "wattage": 650,
+    "type": "modular",
+    "efficiency": 2,
+    "image": "images/psu/be quiet! Pure Power 13M 650W.png",
+    "link": "https://www.amazon.com/s?k=be+quiet+Pure+Power+13M+650W"
+  },
+  {
+    "id": 4,
+    "name": "Corsair RM650x 650W",
+    "price": 120,
+    "wattage": 650,
+    "type": "modular",
+    "efficiency": 2,
+    "image": "images/psu/Corsair RM650x 650W.png",
+    "link": "https://www.amazon.com/s?k=Corsair+RM650x+650W"
+  },
+  {
+    "id": 5,
+    "name": "Cooler Master GX III Gold 750W",
+    "price": 110,
+    "wattage": 750,
+    "type": "semi modular",
+    "efficiency": 2,
+    "image": "images/psu/Cooler Master GX III Gold 750W.png",
+    "link": "https://www.amazon.com/s?k=Cooler+Master+GX+III+Gold+750W"
+  },
+  {
+    "id": 6,
+    "name": "Corsair RM750x 750W",
+    "price": 140,
+    "wattage": 750,
+    "type": "modular",
+    "efficiency": 2,
+    "image": "images/psu/Corsair RM750x 750W.png",
+    "link": "https://www.amazon.com/s?k=Corsair+RM750x+750W"
+  },
+  {
+    "id": 7,
+    "name": "ASUS TUF Gaming 750W Gold",
+    "price": 160,
+    "wattage": 750,
+    "type": "modular",
+    "efficiency": 2,
+    "image": "images/psu/ASUS TUF Gaming 750W Gold.png",
+    "link": "https://www.amazon.com/s?k=ASUS+TUF+Gaming+750W+Gold"
+  },
+  {
+    "id": 8,
+    "name": "DeepCool PX850G 850W",
+    "price": 150,
+    "wattage": 850,
+    "type": "modular",
+    "efficiency": 2,
+    "image": "images/psu/DeepCool PX850G 850W.png",
+    "link": "https://www.amazon.com/s?k=DeepCool+PX850G+850W"
+  },
+  {
+    "id": 9,
+    "name": "Corsair RM850x 850W",
+    "price": 170,
+    "wattage": 850,
+    "type": "modular",
+    "efficiency": 2,
+    "image": "images/psu/Corsair RM850x 850W.png",
+    "link": "https://www.amazon.com/s?k=Corsair+RM850x+850W"
+  },
+  {
+    "id": 10,
+    "name": "Seasonic Prime TX-1000 1000W",
+    "price": 320,
+    "wattage": 1000,
+    "type": "modular",
+    "efficiency": 3,
+    "image": "images/psu/Seasonic Prime TX-1000 1000W.png",
+    "link": "https://www.amazon.com/s?k=Seasonic+Prime+TX-1000+1000W"
+  }
+]

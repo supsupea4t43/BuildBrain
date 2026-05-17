@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "name": "Fractal Design North (Charcoal Black)",
+    "price": 130,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 355,
+    "max_cooler_height_mm": 170,
+    "image": "images/case/Fractal Design North (Charcoal Black).png",
+    "link": "https://www.amazon.com/dp/B09V878FXQ"
+  },
+  {
+    "id": 2,
+    "name": "Fractal Design North (Chalk White)",
+    "price": 130,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 355,
+    "max_cooler_height_mm": 170,
+    "image": "images/case/Fractal Design North (Chalk White).png",
+    "link": "https://www.amazon.com/dp/B09Y9FSZFX"
+  },
+  {
+    "id": 3,
+    "name": "Lian Li Lancool 216 (Black)",
+    "price": 105,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 392,
+    "max_cooler_height_mm": 180,
+    "image": "images/case/Lian Li Lancool 216 (Black).png",
+    "link": "https://www.amazon.com/dp/B0BRP58KHT"
+  },
+  {
+    "id": 4,
+    "name": "Lian Li Lancool 216 RGB (Black)",
+    "price": 120,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 392,
+    "max_cooler_height_mm": 180,
+    "image": "images/case/Lian LI Lancool 216 RGB (Black).png",
+    "link": "https://www.amazon.com/dp/B0BN3SY5XW"
+  },
+  {
+    "id": 5,
+    "name": "NZXT H7 Flow 2024 (Black)",
+    "price": 130,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 400,
+    "max_cooler_height_mm": 185,
+    "image": "images/case/NZXT H7 Flow 2024 (Black).png",
+    "link": "https://www.amazon.com/NZXT-Flow-2024-Pre-Installed-CM-H72FB-01/dp/B0CV4R1TWS?th=1"
+  },
+  {
+    "id": 6,
+    "name": "Corsair 4000D Airflow (Black)",
+    "price": 105,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 360,
+    "max_cooler_height_mm": 170,
+    "image": "images/case/Corsair 4000D Airflow (Black).png",
+    "link": "https://www.amazon.com/dp/B08C7BGV3D"
+  },
+  {
+    "id": 7,
+    "name": "be quiet! Pure Base 500DX (Black)",
+    "price": 110,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 369,
+    "max_cooler_height_mm": 190,
+    "image": "images/case/be quiet! Pure Base 500DX (Black).png",
+    "link": "https://www.amazon.com/dp/B087D7DBW6"
+  },
+  {
+    "id": 8,
+    "name": "Phanteks Eclipse G500A DRGB (Black)",
+    "price": 100,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 435,
+    "max_cooler_height_mm": 190,
+    "image": "images/case/Phanteks Eclipse G500A DRGB (Black).png",
+    "link": "https://www.amazon.com/dp/B0BMPG47KQ"
+  },
+  {
+    "id": 9,
+    "name": "Phanteks Eclipse G500A Performance (Black)",
+    "price": 90,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 435,
+    "max_cooler_height_mm": 190,
+    "image": "images/case/Phanteks Eclipse.png",
+    "link": "https://www.amazon.com/dp/B0BMPPSP5M"
+  },
+  {
+    "id": 10,
+    "name": "Cooler Master MasterBox Q300L (mATX)",
+    "price": 55,
+    "motherboard_size": 2,
+    "max_gpu_length_mm": 360,
+    "max_cooler_height_mm": 157,
+    "image": "images/case/Cooler Master MasterBox Q300L (mATX).png",
+    "link": "https://www.amazon.com/Cooler-Master-Transparent-Adjustable-Ventilated/dp/B0785GRMPG"
+  },
+  {
+    "id": 11,
+    "name": "NZXT H5 Flow 2024 (Black)",
+    "price": 100,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 390,
+    "max_cooler_height_mm": 185,
+    "image": "images/case/NZXT H5 Flow 2024 (Black).png",
+    "link": "https://www.amazon.com/NZXT-Flow-2024-Mid-Tower-Management/dp/B0D2MK6NML?th=1"
+  },
+  {
+    "id": 12,
+    "name": "Fractal Design North XL (Charcoal Black)",
+    "price": 175,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 413,
+    "max_cooler_height_mm": 188,
+    "image": "images/case/Fractal Design North XL (Charcoal Black).png",
+    "link": "https://www.amazon.com/dp/B0CJCJ3ZZB"
+  },
+  {
+    "id": 13,
+    "name": "Lian Li Lancool 207 (Black)",
+    "price": 90,
+    "motherboard_size": 3,
+    "max_gpu_length_mm": 380,
+    "max_cooler_height_mm": 175,
+    "image": "images/case/Lian Li Lancool 207 (Black).png",
+    "link": "https://www.amazon.com/LANCOOL-Computer-Optimized-Pre-Installed-Tempered/dp/B0DHXWYK4J?th=1"
+  }
+]

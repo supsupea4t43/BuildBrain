@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "AMD Radeon RX 7600",
+    "price": 280,
+    "score": 16505,
+    "vram": 8,
+    "power": 165,
+    "length_mm": 267,
+    "image": "images/gpu/AMD Radeon RX 7600.png",
+    "link": "https://www.amazon.com/s?k=AMD+Radeon+RX+7600"
+  },
+  {
+    "id": 2,
+    "name": "Nvidia GeForce RTX 4060",
+    "price": 320,
+    "score": 19508,
+    "vram": 8,
+    "power": 115,
+    "length_mm": 240,
+    "image": "images/gpu/Nvidia GeForce RTX 4060.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4060"
+  },
+  {
+    "id": 3,
+    "name": "Nvidia GeForce RTX 4060 Ti 8GB",
+    "price": 420,
+    "score": 22609,
+    "vram": 8,
+    "power": 165,
+    "length_mm": 252,
+    "image": "images/gpu/Nvidia GeForce RTX 4060 Ti 8GB.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4060+Ti+8GB"
+  },
+  {
+    "id": 4,
+    "name": "Nvidia GeForce RTX 4060 Ti 16GB",
+    "price": 500,
+    "score": 22635,
+    "vram": 16,
+    "power": 165,
+    "length_mm": 252,
+    "image": "images/gpu/Nvidia GeForce RTX 4060 Ti 16GB.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4060+Ti+16GB"
+  },
+  {
+    "id": 5,
+    "name": "AMD Radeon RX 7700 XT",
+    "price": 440,
+    "score": 22687,
+    "vram": 12,
+    "power": 245,
+    "length_mm": 267,
+    "image": "images/gpu/AMD Radeon RX 7700 XT.png",
+    "link": "https://www.amazon.com/s?k=AMD+Radeon+RX+7700+XT"
+  },
+  {
+    "id": 6,
+    "name": "AMD Radeon RX 7800 XT",
+    "price": 500,
+    "score": 24359,
+    "vram": 16,
+    "power": 263,
+    "length_mm": 267,
+    "image": "images/gpu/AMD Radeon RX 7800 XT.png",
+    "link": "https://www.amazon.com/s?k=AMD+Radeon+RX+7800+XT"
+  },
+  {
+    "id": 7,
+    "name": "Nvidia GeForce RTX 4070",
+    "price": 560,
+    "score": 26902,
+    "vram": 12,
+    "power": 200,
+    "length_mm": 285,
+    "image": "images/gpu/Nvidia GeForce RTX 4070.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4070"
+  },
+  {
+    "id": 8,
+    "name": "Nvidia GeForce RTX 4070 Super",
+    "price": 620,
+    "score": 29959,
+    "vram": 12,
+    "power": 220,
+    "length_mm": 285,
+    "image": "images/gpu/Nvidia GeForce RTX 4070 Super.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4070+Super"
+  },
+  {
+    "id": 9,
+    "name": "AMD Radeon RX 7900 GRE",
+    "price": 560,
+    "score": 27404,
+    "vram": 16,
+    "power": 260,
+    "length_mm": 287,
+    "image": "images/gpu/AMD Radeon RX 7900 GRE.png",
+    "link": "https://www.amazon.com/s?k=AMD+Radeon+RX+7900+GRE"
+  },
+  {
+    "id": 10,
+    "name": "Nvidia GeForce RTX 4070 Ti",
+    "price": 760,
+    "score": 31570,
+    "vram": 12,
+    "power": 285,
+    "length_mm": 336,
+    "image": "images/gpu/Nvidia GeForce RTX 4070 Ti.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4070+Ti"
+  },
+  {
+    "id": 11,
+    "name": "Nvidia GeForce RTX 4070 Ti Super",
+    "price": 820,
+    "score": 31822,
+    "vram": 16,
+    "power": 285,
+    "length_mm": 336,
+    "image": "images/gpu/Nvidia GeForce RTX 4070 Ti Super.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4070+Ti+Super"
+  },
+  {
+    "id": 12,
+    "name": "AMD Radeon RX 7900 XT",
+    "price": 760,
+    "score": 29055,
+    "vram": 20,
+    "power": 315,
+    "length_mm": 287,
+    "image": "images/gpu/AMD Radeon RX 7900 XT.png",
+    "link": "https://www.amazon.com/s?k=AMD+Radeon+RX+7900+XT"
+  },
+  {
+    "id": 13,
+    "name": "AMD Radeon RX 7900 XTX",
+    "price": 900,
+    "score": 31417,
+    "vram": 24,
+    "power": 355,
+    "length_mm": 287,
+    "image": "images/gpu/AMD Radeon RX 7900 XTX.png",
+    "link": "https://www.amazon.com/s?k=AMD+Radeon+RX+7900+XTX"
+  },
+  {
+    "id": 14,
+    "name": "Nvidia GeForce RTX 4080",
+    "price": 1000,
+    "score": 34448,
+    "vram": 16,
+    "power": 320,
+    "length_mm": 336,
+    "image": "images/gpu/Nvidia GeForce RTX 4080.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4080"
+  },
+  {
+    "id": 15,
+    "name": "Nvidia GeForce RTX 4080 Super",
+    "price": 1060,
+    "score": 34274,
+    "vram": 16,
+    "power": 320,
+    "length_mm": 336,
+    "image": "images/gpu/Nvidia GeForce RTX 4080 Super.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4080+Super"
+  },
+  {
+    "id": 16,
+    "name": "Nvidia GeForce RTX 4090",
+    "price": 1800,
+    "score": 38074,
+    "vram": 24,
+    "power": 450,
+    "length_mm": 336,
+    "image": "images/gpu/Nvidia GeForce RTX 4090.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+4090"
+  },
+  {
+    "id": 17,
+    "name": "Intel Arc B580",
+    "price": 260,
+    "score": 15963,
+    "vram": 12,
+    "power": 190,
+    "length_mm": 272,
+    "image": "images/gpu/Intel Arc B580.png",
+    "link": "https://www.amazon.com/s?k=Intel+Arc+B580"
+  },
+  {
+    "id": 18,
+    "name": "AMD Radeon RX 9070",
+    "price": 580,
+    "score": 25405,
+    "vram": 16,
+    "power": 220,
+    "length_mm": 270,
+    "image": "images/gpu/AMD Radeon RX 9070.png",
+    "link": "https://www.amazon.com/s?k=AMD+Radeon+RX+9070"
+  },
+  {
+    "id": 19,
+    "name": "AMD Radeon RX 9070 XT",
+    "price": 660,
+    "score": 26911,
+    "vram": 16,
+    "power": 304,
+    "length_mm": 280,
+    "image": "images/gpu/AMD Radeon RX 9070 XT.png",
+    "link": "https://www.amazon.com/s?k=AMD+Radeon+RX+9070+XT"
+  },
+  {
+    "id": 20,
+    "name": "Nvidia GeForce RTX 5070",
+    "price": 800,
+    "score": 28738,
+    "vram": 12,
+    "power": 250,
+    "length_mm": 305,
+    "image": "images/gpu/Nvidia GeForce RTX 5070.png",
+    "link": "https://www.amazon.com/s?k=Nvidia+GeForce+RTX+5070"
+  }
+]

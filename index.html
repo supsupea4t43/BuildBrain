@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+
+  <!-- ── Onboarding slides ── -->
+  <div class="onboarding" id="onboarding">
+    <div class="ob-slides" id="ob-slides">
+
+      <!-- Slide 1: Use case -->
+      <div class="ob-slide" id="slide-usecase">
+        <h2 class="ob-title">What will you use it for?</h2>
+        <p class="ob-sub">This shapes how we balance CPU vs GPU budget</p>
+        <div class="ob-use-track">
+          <div class="ob-use-labels">
+            <span>Productivity</span>
+            <span>Gaming</span>
+            <span>3D / Render</span>
+          </div>
+          <div class="ob-slider-wrap">
+            <input type="range" id="usecase-slider" min="0" max="100" value="50" step="1">
+            <div class="ob-slider-fill" id="slider-fill"></div>
+          </div>
+          <div class="ob-use-desc" id="usecase-desc">Balanced — office work + light gaming</div>
+        </div>
+        <button class="ob-next" id="next-usecase">Continue →</button>
+      </div>
+
+      <!-- Slide 2: Resolution -->
+      <div class="ob-slide hidden" id="slide-res">
+        <h2 class="ob-title">Target resolution?</h2>
+        <p class="ob-sub">Higher resolution needs a stronger GPU</p>
+        <div class="ob-res-options">
+          <button class="ob-res-btn active" data-res="1080">
+            <span class="res-label">1080p</span>
+            <span class="res-sub">Full HD · 1920×1080</span>
+          </button>
+          <button class="ob-res-btn" data-res="1440">
+            <span class="res-label">1440p</span>
+            <span class="res-sub">Quad HD · 2560×1440</span>
+          </button>
+        </div>
+        <button class="ob-next" id="next-res">Continue →</button>
+      </div>
+
+      <!-- Slide 3: Budget -->
+      <div class="ob-slide hidden" id="slide-budget">
+        <h2 class="ob-title">What's your budget?</h2>
+        <p class="ob-sub">Not a hard limit — just a target we'll aim for</p>
+        <div class="ob-budget-wrap">
+          <div class="ob-budget-display">
+            $<span id="budget-display">1000</span>
+          </div>
+          <div class="ob-slider-wrap">
+            <input type="range" id="budget-slider" min="300" max="5000" value="1000" step="50">
+            <div class="ob-slider-fill" id="budget-slider-fill"></div>
+          </div>
+          <div class="ob-budget-ticks">
+            <span>$300</span><span>$1000</span><span>$2000</span><span>$3500</span><span>$5000</span>
+          </div>
+        </div>
+        <button class="ob-next" id="start-build">Start Building →</button>
+      </div>
+
+    </div>
+
+    <!-- Progress dots -->
+    <div class="ob-dots">
+      <span class="ob-dot active" data-slide="0"></span>
+      <span class="ob-dot" data-slide="1"></span>
+      <span class="ob-dot" data-slide="2"></span>
+    </div>
+  </div>
+
+  <main class="builder hidden" id="builder">
+    <header class="builder-header">
+      <h1>PC Builder</h1>
+      <p class="subtitle">Select components to build your system</p>
+    </header>
+
+    <div class="component-grid">
+      <button class="comp-btn" data-type="cpu">
+        <span class="comp-icon">⬡</span>
+        <span class="comp-label">CPU</span>
+        <span class="comp-selected" id="selected-cpu">Not selected</span>
+        <span class="comp-lock" id="lock-cpu"></span>
+      </button>
+      <div class="gpu-wrapper">
+        <button class="comp-btn" data-type="gpu">
+          <span class="comp-icon">▣</span>
+          <span class="comp-label">GPU</span>
+          <span class="comp-selected" id="selected-gpu">Not selected</span>
+          <span class="comp-lock" id="lock-gpu"></span>
+        </button>
+        <button class="no-gpu-toggle" id="no-gpu-btn" title="Skip GPU — use CPU integrated graphics">Skip — use iGPU</button>
+      </div>
+      <button class="comp-btn locked" data-type="psu" id="btn-psu">
+        <span class="comp-icon">⚡</span>
+        <span class="comp-label">PSU</span>
+        <span class="comp-selected" id="selected-psu">Select CPU first</span>
+        <span class="comp-lock" id="lock-psu">🔒</span>
+      </button>
+      <button class="comp-btn locked" data-type="motherboard" id="btn-motherboard">
+        <span class="comp-icon">◫</span>
+        <span class="comp-label">Motherboard</span>
+        <span class="comp-selected" id="selected-motherboard">Select CPU first</span>
+        <span class="comp-lock" id="lock-motherboard">🔒</span>
+      </button>
+      <button class="comp-btn locked" data-type="ram" id="btn-ram">
+        <span class="comp-icon">▤</span>
+        <span class="comp-label">RAM</span>
+        <span class="comp-selected" id="selected-ram">Select CPU & Motherboard first</span>
+        <span class="comp-lock" id="lock-ram">🔒</span>
+      </button>
+      <button class="comp-btn locked" data-type="storage" id="btn-storage">
+        <span class="comp-icon">◉</span>
+        <span class="comp-label">Storage</span>
+        <span class="comp-selected" id="selected-storage">Select Motherboard first</span>
+        <span class="comp-lock" id="lock-storage">🔒</span>
+      </button>
+      <button class="comp-btn locked" data-type="case" id="btn-case">
+        <span class="comp-icon">▭</span>
+        <span class="comp-label">Case</span>
+        <span class="comp-selected" id="selected-case">Select Motherboard first</span>
+        <span class="comp-lock" id="lock-case">🔒</span>
+      </button>
+    </div>
+
+    <div class="fps-display" id="fps-display">
+      <div class="fps-hint">Select CPU &amp; GPU to see predicted FPS</div>
+    </div>
+
+    <div class="build-summary" id="build-summary">
+      <div class="summary-row">
+        <span>Total TDP</span>
+        <span id="summary-tdp">— W</span>
+      </div>
+      <div class="summary-row">
+        <span>Total Price</span>
+        <span id="summary-price">$0</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Panel overlay backdrop -->
+  <div class="panel-backdrop" id="panel-backdrop"></div>
+
+  <!-- Component list panel (slides up from bottom) -->
+  <div class="list-panel" id="list-panel">
+    <div class="panel-handle"></div>
+    <div class="panel-header">
+      <h2 id="panel-title">Select Component</h2>
+      <button class="close-btn" id="close-panel">✕</button>
+    </div>
+    <div class="component-list" id="component-list"></div>
+  </div>
+
+  <!-- Detail panel (slides in from left) -->
+  <div class="detail-panel" id="detail-panel">
+    <button class="detail-close" id="close-detail">✕</button>
+    <div class="detail-content" id="detail-content"></div>
+  </div>
+
+  <!-- Storage slot picker (slides in from right) -->
+  <div class="storage-picker" id="storage-picker">
+    <button class="detail-close" id="close-storage-picker">✕</button>
+    <div class="storage-picker-content">
+      <h2 class="storage-picker-title">Storage Slots</h2>
+      <p class="storage-picker-sub">Pick a slot to add storage to</p>
+      <div class="storage-slots" id="storage-slots"></div>
+    </div>
+  </div>
+
+  <script src="js/components.js"></script>
+  <script src="js/compatibility.js"></script>
+  <script src="js/recommender.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

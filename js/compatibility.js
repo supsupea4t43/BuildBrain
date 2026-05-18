@@ -17,6 +17,9 @@ function checkCompatibility(item, type, build, components) {
       // If mobo already selected, check socket
       if (mobo && item.socket !== mobo.socket)
         issues.push(`Socket ${item.socket} ≠ mobo ${mobo.socket}`);
+      // If mobo already selected, check RAM type compatibility
+      if (mobo && item.memory_type !== mobo.ram_type)
+        issues.push(`CPU needs ${item.memory_type} but mobo is ${mobo.ram_type}`);
       // If PSU selected, check TDP
       if (psu) {
         const gpuPwr = gpu ? gpu.power : 0;
@@ -44,12 +47,23 @@ function checkCompatibility(item, type, build, components) {
       const needed = cpuPwr + gpuPwr + 50;
       if (item.wattage < needed)
         issues.push(`Only ${item.wattage}W — need ~${needed}W`);
+      // Check PSU form factor fits in case
+      if (kase && kase.max_psu_form_factor && item.form_factor) {
+        const formFactorRank = { 'ATX': 2, 'SFX-L': 1, 'SFX': 0 };
+        const psuRank  = formFactorRank[item.form_factor]  ?? 2;
+        const caseRank = formFactorRank[kase.max_psu_form_factor] ?? 2;
+        if (psuRank > caseRank)
+          issues.push(`PSU is ${item.form_factor} but case only fits ${kase.max_psu_form_factor}`);
+      }
       break;
 
     case 'motherboard':
       // Socket must match CPU
       if (cpu && item.socket !== cpu.socket)
         issues.push(`Socket ${item.socket} ≠ CPU ${cpu.socket}`);
+      // RAM type must match CPU memory type
+      if (cpu && item.ram_type !== cpu.memory_type)
+        issues.push(`Mobo is ${item.ram_type} but CPU requires ${cpu.memory_type}`);
       // VRM must handle CPU TDP
       if (cpu && item.vrm_max_watts && cpu.power > item.vrm_max_watts)
         issues.push(`VRM max ${item.vrm_max_watts}W < CPU ${cpu.power}W`);
@@ -81,6 +95,14 @@ function checkCompatibility(item, type, build, components) {
       // Must fit GPU length
       if (gpu && gpu.length_mm && item.max_gpu_length_mm && gpu.length_mm > item.max_gpu_length_mm)
         issues.push(`GPU ${gpu.length_mm}mm > case max ${item.max_gpu_length_mm}mm`);
+      // PSU form factor must fit
+      if (psu && psu.form_factor && item.max_psu_form_factor) {
+        const formFactorRank = { 'ATX': 2, 'SFX-L': 1, 'SFX': 0 };
+        const psuRank  = formFactorRank[psu.form_factor]  ?? 2;
+        const caseRank = formFactorRank[item.max_psu_form_factor] ?? 2;
+        if (psuRank > caseRank)
+          issues.push(`PSU is ${psu.form_factor} but this case only fits ${item.max_psu_form_factor}`);
+      }
       break;
   }
 

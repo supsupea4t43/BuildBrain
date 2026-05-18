@@ -63,6 +63,14 @@ function startBuilder() {
   document.getElementById('close-panel').addEventListener('click', closePanel);
   document.getElementById('close-detail').addEventListener('click', closeDetail);
   document.getElementById('close-storage-picker').addEventListener('click', closeStoragePicker);
+  document.getElementById('finalize-btn').addEventListener('click', openFinalizeModal);
+  document.getElementById('finalize-close').addEventListener('click', closeFinalizeModal);
+  document.getElementById('finalize-backdrop').addEventListener('click', closeFinalizeModal);
+  document.getElementById('finalize-copy-btn').addEventListener('click', copyBuildToClipboard);
+  document.getElementById('finalize-btn').addEventListener('click', openFinalizeModal);
+  document.getElementById('finalize-close').addEventListener('click', closeFinalizeModal);
+  document.getElementById('finalize-backdrop').addEventListener('click', closeFinalizeModal);
+  document.getElementById('finalize-copy-btn').addEventListener('click', copyBuildToClipboard);
 
   listPanel.querySelector('.panel-handle').addEventListener('click', () => {
     if (panelOpen) peekPanel();
@@ -504,6 +512,7 @@ function updateStorageButton() {
     if (label) label.textContent = `${build.storage.length} drive${build.storage.length > 1 ? 's' : ''} selected`;
     if (btn) btn.classList.add('selected');
   }
+  updateFinalizeBtn();
 }
 
 // ── Render list ───────────────────────────────────────────────────────
@@ -657,7 +666,7 @@ function getCardSub(item, type) {
   switch (type) {
     case 'cpu':         return item.socket || '';
     case 'gpu':         return item.vram != null ? `${item.vram}GB VRAM` : '';
-    case 'psu':         return item.wattage ? `${item.wattage}W` : '';
+    case 'psu':         return item.wattage ? `${item.wattage}W · ${item.form_factor || 'ATX'}` : '';
     case 'motherboard': return item.socket || '';
     case 'ram':         return item.gb ? `${item.gb}GB ${item.ddr}` : '';
     case 'storage':     return item.capacity_gb ? `${item.capacity_gb}GB` : '';
@@ -682,6 +691,7 @@ function getSpecRows(item, type) {
       break;
     case 'psu':
       add('Wattage', item.wattage ? `${item.wattage}W` : null);
+      add('Form factor', item.form_factor || null);
       add('Type', item.type);
       add('Efficiency', item.efficiency ? ['Bronze','Gold','Platinum'][item.efficiency-1] : null);
       break;
@@ -708,6 +718,7 @@ function getSpecRows(item, type) {
       add('Max mobo size', ['ITX','mATX','ATX'][item.motherboard_size-1]);
       add('Max GPU', item.max_gpu_length_mm ? `${item.max_gpu_length_mm}mm` : null);
       add('Max cooler', item.max_cooler_height_mm ? `${item.max_cooler_height_mm}mm` : null);
+      add('PSU support', item.max_psu_form_factor || null);
       break;
   }
   return rows;
@@ -819,6 +830,115 @@ function updateSummary() {
 
   document.getElementById('summary-tdp').textContent   = `${tdp}W`;
   document.getElementById('summary-price').textContent = `$${totalPrice.toLocaleString()}`;
+
+  updateFinalizeBtn();
+}
+
+// ── Finalize ──────────────────────────────────────────────────────────
+function isBuildComplete() {
+  const gpuOk = build.gpuId != null || noGpu;
+  return (
+    build.cpuId         != null &&
+    gpuOk                        &&
+    build.psuId         != null &&
+    build.motherboardId != null &&
+    build.ramId         != null &&
+    build.storage.length > 0    &&
+    build.caseId        != null
+  );
+}
+
+function updateFinalizeBtn() {
+  const btn = document.getElementById('finalize-btn');
+  if (!btn) return;
+  const complete = isBuildComplete();
+  btn.disabled = !complete;
+  btn.classList.toggle('ready', complete);
+}
+
+function openFinalizeModal() {
+  const body  = document.getElementById('finalize-body');
+  const total = document.getElementById('finalize-total');
+
+  const rows  = buildSummaryRows();
+  let   grand = 0;
+
+  body.innerHTML = rows.map(row => {
+    grand += row.price;
+    const compatClass = row.compat ? '' : 'finalize-row-incompat';
+    return `
+      <div class="finalize-row ${compatClass}">
+        <div class="finalize-row-left">
+          <span class="finalize-row-type">${row.type}</span>
+          <span class="finalize-row-name">${row.name}</span>
+          ${!row.compat ? `<span class="finalize-row-warn">⚠ Compatibility issue</span>` : ''}
+        </div>
+        <div class="finalize-row-right">
+          <span class="finalize-row-price">$${row.price}</span>
+          <a class="finalize-row-link" href="${row.link}" target="_blank" rel="noopener">View →</a>
+        </div>
+      </div>`;
+  }).join('');
+
+  total.innerHTML = `
+    <span>Estimated total</span>
+    <span class="finalize-grand">$${grand.toLocaleString()}</span>
+  `;
+
+  document.getElementById('finalize-backdrop').classList.add('visible');
+  document.getElementById('finalize-modal').classList.add('open');
+}
+
+function closeFinalizeModal() {
+  document.getElementById('finalize-backdrop').classList.remove('visible');
+  document.getElementById('finalize-modal').classList.remove('open');
+}
+
+function buildSummaryRows() {
+  const rows = [];
+
+  const addRow = (type, item, compat = true) => {
+    if (!item) return;
+    rows.push({ type, name: item.name, price: item.price || 0, link: item.link || '#', compat });
+  };
+
+  const cpu  = build.cpuId ? components.cpus.find(c => c.id === build.cpuId) : null;
+  const gpu  = build.gpuId ? components.gpus.find(g => g.id === build.gpuId) : null;
+  const psu  = build.psuId ? components.psus.find(p => p.id === build.psuId) : null;
+  const mobo = build.motherboardId ? components.motherboards.find(m => m.id === build.motherboardId) : null;
+  const ram  = build.ramId ? components.rams.find(r => r.id === build.ramId) : null;
+  const kase = build.caseId ? components.cases.find(c => c.id === build.caseId) : null;
+
+  if (cpu)  addRow('CPU', cpu,  checkCompatibility(cpu,  'cpu',  build, components).length === 0);
+  if (gpu)  addRow('GPU', gpu,  checkCompatibility(gpu,  'gpu',  build, components).length === 0);
+  if (mobo) addRow('Motherboard', mobo, checkCompatibility(mobo, 'motherboard', build, components).length === 0);
+  if (ram)  addRow('RAM', ram,  checkCompatibility(ram,  'ram',  build, components).length === 0);
+  if (psu)  addRow('PSU', psu,  checkCompatibility(psu,  'psu',  build, components).length === 0);
+  if (kase) addRow('Case', kase, checkCompatibility(kase, 'case', build, components).length === 0);
+
+  build.storage.forEach((s, i) => {
+    const item = components.storage.find(x => x.id === s.itemId);
+    if (item) rows.push({ type: `Storage ${i + 1}`, name: item.name, price: item.price || 0, link: item.link || '#', compat: true });
+  });
+
+  return rows;
+}
+
+function copyBuildToClipboard() {
+  const rows  = buildSummaryRows();
+  let   grand = 0;
+  const lines = rows.map(r => {
+    grand += r.price;
+    return `${r.type}: ${r.name} — $${r.price}\n  ${r.link}`;
+  });
+  lines.push('');
+  lines.push(`Total estimate: $${grand.toLocaleString()}`);
+
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.getElementById('finalize-copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy to clipboard', 2000);
+  });
 }
 
 init();

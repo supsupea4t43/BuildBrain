@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PC Builder</title>
+  <title>BuildBrain</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -81,7 +81,10 @@
 
   <main class="builder hidden" id="builder">
     <header class="builder-header">
-      <h1>PC Builder</h1>
+      <div class="builder-title-row">
+        <img src="/images/logo.png" alt="BuildBrain logo" class="builder-logo">
+        <h1>BuildBrain</h1>
+      </div>
       <p class="subtitle">Select components to build your system</p>
     </header>
 
@@ -147,7 +150,27 @@
         <span id="summary-price">$0</span>
       </div>
     </div>
+
+    <button class="finalize-btn" id="finalize-btn" disabled>
+      Finalize Build
+    </button>
   </main>
+
+  <!-- Finalize modal -->
+  <div class="finalize-backdrop" id="finalize-backdrop"></div>
+  <div class="finalize-modal" id="finalize-modal">
+    <div class="finalize-header">
+      <h2 class="finalize-title">Your Build</h2>
+      <button class="finalize-close" id="finalize-close">✕</button>
+    </div>
+    <div class="finalize-body" id="finalize-body"></div>
+    <div class="finalize-footer">
+      <div class="finalize-total" id="finalize-total"></div>
+      <button class="finalize-copy-btn" id="finalize-copy-btn">
+        📋 Copy to clipboard
+      </button>
+    </div>
+  </div>
 
   <!-- Panel overlay backdrop -->
   <div class="panel-backdrop" id="panel-backdrop"></div>

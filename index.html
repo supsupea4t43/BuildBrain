@@ -20,9 +20,10 @@
         <p class="ob-sub">This shapes how we balance CPU vs GPU budget</p>
         <div class="ob-use-track">
           <div class="ob-use-labels">
+            <span>CPU Render</span>
             <span>Productivity</span>
             <span>Gaming</span>
-            <span>3D / Render</span>
+            <span>3D Render</span>
           </div>
           <div class="ob-slider-wrap">
             <input type="range" id="usecase-slider" min="0" max="100" value="50" step="1">
@@ -61,9 +62,17 @@
           <div class="ob-slider-wrap">
             <input type="range" id="budget-slider" min="300" max="5000" value="1000" step="50">
             <div class="ob-slider-fill" id="budget-slider-fill"></div>
+            <div class="ob-budget-tick-marks">
+              <span style="left:0%"></span>
+              <span style="left:14.9%"></span>
+              <span style="left:36.2%"></span>
+              <span style="left:57.4%"></span>
+              <span style="left:78.7%"></span>
+              <span style="left:100%"></span>
+            </div>
           </div>
           <div class="ob-budget-ticks">
-            <span>$300</span><span>$1000</span><span>$2000</span><span>$3500</span><span>$5000</span>
+            <span>$300</span><span>$1000</span><span>$2000</span><span>$3000</span><span>$4000</span><span>$5000</span>
           </div>
         </div>
         <button class="ob-next" id="start-build">Start Building →</button>
@@ -89,51 +98,55 @@
     </header>
 
     <div class="component-grid">
-      <button class="comp-btn" data-type="cpu">
-        <span class="comp-icon">⬡</span>
-        <span class="comp-label">CPU</span>
-        <span class="comp-selected" id="selected-cpu">Not selected</span>
-        <span class="comp-lock" id="lock-cpu"></span>
-      </button>
-      <div class="gpu-wrapper">
-        <button class="comp-btn" data-type="gpu">
-          <span class="comp-icon">▣</span>
-          <span class="comp-label">GPU</span>
-          <span class="comp-selected" id="selected-gpu">Not selected</span>
-          <span class="comp-lock" id="lock-gpu"></span>
+      <div class="comp-row-top">
+        <button class="comp-btn" data-type="cpu">
+          <span class="comp-icon">⬡</span>
+          <span class="comp-label">CPU</span>
+          <span class="comp-selected" id="selected-cpu">Not selected</span>
+          <span class="comp-lock" id="lock-cpu"></span>
         </button>
-        <button class="no-gpu-toggle" id="no-gpu-btn" title="Skip GPU — use CPU integrated graphics">Skip — use iGPU</button>
+        <div class="gpu-wrapper">
+          <button class="comp-btn" data-type="gpu">
+            <span class="comp-icon">▣</span>
+            <span class="comp-label">GPU</span>
+            <span class="comp-selected" id="selected-gpu">Not selected</span>
+            <span class="comp-lock" id="lock-gpu"></span>
+          </button>
+          <button class="no-gpu-toggle" id="no-gpu-btn" title="Skip GPU — use CPU integrated graphics">Skip — use iGPU</button>
+        </div>
+        <button class="comp-btn locked" data-type="motherboard" id="btn-motherboard">
+          <span class="comp-icon">◫</span>
+          <span class="comp-label">Motherboard</span>
+          <span class="comp-selected" id="selected-motherboard">Select CPU first</span>
+          <span class="comp-lock" id="lock-motherboard">🔒</span>
+        </button>
       </div>
-      <button class="comp-btn locked" data-type="psu" id="btn-psu">
-        <span class="comp-icon">⚡</span>
-        <span class="comp-label">PSU</span>
-        <span class="comp-selected" id="selected-psu">Select CPU first</span>
-        <span class="comp-lock" id="lock-psu">🔒</span>
-      </button>
-      <button class="comp-btn locked" data-type="motherboard" id="btn-motherboard">
-        <span class="comp-icon">◫</span>
-        <span class="comp-label">Motherboard</span>
-        <span class="comp-selected" id="selected-motherboard">Select CPU first</span>
-        <span class="comp-lock" id="lock-motherboard">🔒</span>
-      </button>
-      <button class="comp-btn locked" data-type="ram" id="btn-ram">
-        <span class="comp-icon">▤</span>
-        <span class="comp-label">RAM</span>
-        <span class="comp-selected" id="selected-ram">Select CPU & Motherboard first</span>
-        <span class="comp-lock" id="lock-ram">🔒</span>
-      </button>
-      <button class="comp-btn locked" data-type="storage" id="btn-storage">
-        <span class="comp-icon">◉</span>
-        <span class="comp-label">Storage</span>
-        <span class="comp-selected" id="selected-storage">Select Motherboard first</span>
-        <span class="comp-lock" id="lock-storage">🔒</span>
-      </button>
-      <button class="comp-btn locked" data-type="case" id="btn-case">
-        <span class="comp-icon">▭</span>
-        <span class="comp-label">Case</span>
-        <span class="comp-selected" id="selected-case">Select Motherboard first</span>
-        <span class="comp-lock" id="lock-case">🔒</span>
-      </button>
+      <div class="comp-row-bottom">
+        <button class="comp-btn locked" data-type="psu" id="btn-psu">
+          <span class="comp-icon">⚡</span>
+          <span class="comp-label">PSU</span>
+          <span class="comp-selected" id="selected-psu">Select CPU first</span>
+          <span class="comp-lock" id="lock-psu">🔒</span>
+        </button>
+        <button class="comp-btn locked" data-type="ram" id="btn-ram">
+          <span class="comp-icon">▤</span>
+          <span class="comp-label">RAM</span>
+          <span class="comp-selected" id="selected-ram">Select CPU & Motherboard first</span>
+          <span class="comp-lock" id="lock-ram">🔒</span>
+        </button>
+        <button class="comp-btn locked" data-type="storage" id="btn-storage">
+          <span class="comp-icon">◉</span>
+          <span class="comp-label">Storage</span>
+          <span class="comp-selected" id="selected-storage">Select Motherboard first</span>
+          <span class="comp-lock" id="lock-storage">🔒</span>
+        </button>
+        <button class="comp-btn locked" data-type="case" id="btn-case">
+          <span class="comp-icon">▭</span>
+          <span class="comp-label">Case</span>
+          <span class="comp-selected" id="selected-case">Select Motherboard first</span>
+          <span class="comp-lock" id="lock-case">🔒</span>
+        </button>
+      </div>
     </div>
 
     <div class="fps-display" id="fps-display">

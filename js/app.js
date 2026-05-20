@@ -452,10 +452,11 @@ function renderStorageListFiltered(filterType) {
       ? `<img src="${item.image}" alt="${item.name}" loading="lazy">`
       : `<div class="no-img">◉</div>`;
 
-    const recBadge = isRec ? `<div class="rec-badge">⭐ Recommended</div>` : '';
+    const storageBadge = isRec
+      ? `<div class="compat-badge ok rec">⭐ Recommended</div>`
+      : `<div class="compat-badge ok">✓ Compatible</div>`;
 
     card.innerHTML = `
-      ${recBadge}
       ${imgHTML}
       <div class="card-name">${item.name}</div>
       <div class="card-meta">
@@ -463,7 +464,7 @@ function renderStorageListFiltered(filterType) {
         <span>$${item.price}</span>
       </div>
       <div class="card-score"><span>${item.read_mbps} MB/s read</span></div>
-      <div class="compat-badge ok">✓ Compatible</div>
+      ${storageBadge}
       <button class="select-hover-btn">Select</button>
     `;
 
@@ -569,12 +570,11 @@ function renderList(type) {
     const scoreHTML = normScore != null
       ? `<div class="card-score"><span>Score ${normScore.toFixed(1)}/100</span></div>` : '';
 
-    const badgeHTML = ok
-      ? `<div class="compat-badge ok">✓ Compatible</div>`
-      : `<div class="compat-badge fail">✗ ${issues[0]}</div>`;
-
-    const recBadge = isActuallyRec
-      ? `<div class="rec-badge">⭐ Recommended</div>` : '';
+    const badgeHTML = isActuallyRec
+      ? `<div class="compat-badge ok rec">⭐ Recommended</div>`
+      : ok
+        ? `<div class="compat-badge ok">✓ Compatible</div>`
+        : `<div class="compat-badge fail">✗ ${issues[0]}</div>`;
 
     const priceStr = item.price != null ? `$${item.price}` : '—';
     const subStr   = getCardSub(item, type);
@@ -582,7 +582,6 @@ function renderList(type) {
     const btnLabel = ok ? 'Select' : 'Select anyway';
 
     card.innerHTML = `
-      ${recBadge}
       ${imgHTML}
       <div class="card-name">${item.name}</div>
       <div class="card-meta"><span>${subStr}</span><span>${priceStr}</span></div>
@@ -783,6 +782,33 @@ function selectComponent(item, type, issues) {
   updateLocks();
   updateSummary();
   updateFpsDisplay();
+  revalidateSelected();
+}
+
+// Re-check all already-selected components and highlight any that are
+// now incompatible due to the latest selection changing the build state.
+function revalidateSelected() {
+  const typeDataMap = {
+    cpu:         { data: 'cpus',         key: 'cpuId' },
+    gpu:         { data: 'gpus',         key: 'gpuId' },
+    psu:         { data: 'psus',         key: 'psuId' },
+    motherboard: { data: 'motherboards', key: 'motherboardId' },
+    ram:         { data: 'rams',         key: 'ramId' },
+    storage:     null, // handled separately
+    case:        { data: 'cases',        key: 'caseId' },
+  };
+  Object.entries(typeDataMap).forEach(([t, meta]) => {
+    if (!meta) return;
+    const id = build[meta.key];
+    if (id == null) return; // not selected yet
+    const item = components[meta.data].find(i => i.id === id);
+    if (!item) return;
+    const issues = checkCompatibility(item, t, build, components);
+    const btn = document.querySelector(`[data-type="${t}"]`);
+    if (btn && btn.classList.contains('selected')) {
+      btn.classList.toggle('incompat-selected', issues.length > 0);
+    }
+  });
 }
 
 // ── Locks ─────────────────────────────────────────────────────────────

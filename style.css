@@ -92,11 +92,24 @@ body::before {
 
 /* ── Component buttons ── */
 .component-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 860px;
+}
+.comp-row-top {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 80%;
+  margin: 0 auto;
+}
+.comp-row-bottom {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   width: 100%;
-  max-width: 860px;
 }
 
 .comp-btn {
@@ -337,6 +350,7 @@ body::before {
   display: inline-block;
 }
 .compat-badge.ok { background: var(--green-dim); color: var(--green); }
+.compat-badge.ok.rec { background: rgba(245,158,11,0.15); color: #f59e0b; border-color: rgba(245,158,11,0.3); }
 .compat-badge.fail { background: var(--red-dim); color: var(--red); }
 
 /* Select button on hover */
@@ -635,15 +649,27 @@ body::before {
 
 /* Use-case slider */
 .ob-use-track { width: 100%; display: flex; flex-direction: column; gap: 0.75rem; }
-.ob-use-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.72rem;
-  font-family: 'DM Mono', monospace;
-  color: var(--text-muted);
-}
+/* .ob-use-labels styles are defined at end of file with absolute positioning */
 
 .ob-slider-wrap { position: relative; }
+
+/* Tick marks at Productivity (25%) and Gaming (75%) — use-case slider only */
+.ob-use-track .ob-slider-wrap::before,
+.ob-use-track .ob-slider-wrap::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 14px;
+  border-radius: 1px;
+  background: var(--accent);
+  opacity: 0.45;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+.ob-use-track .ob-slider-wrap::before { left: 25%; }
+.ob-use-track .ob-slider-wrap::after  { left: 75%; }
 input[type=range] {
   width: 100%;
   -webkit-appearance: none;
@@ -719,13 +745,53 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   letter-spacing: -0.04em;
 }
 .ob-budget-ticks {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
+  height: 1.4rem;
   font-size: 0.68rem;
   font-family: 'DM Mono', monospace;
   color: var(--text-muted);
-  padding: 0 2px;
 }
+.ob-budget-ticks span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+/* Positions: (value - 300) / 4700 * 100% */
+.ob-budget-ticks span:nth-child(1) { left:  0.0%; transform: translateX(0);    } /* $300  */
+.ob-budget-ticks span:nth-child(2) { left: 14.9%; }                               /* $1000 */
+.ob-budget-ticks span:nth-child(3) { left: 36.2%; }                               /* $2000 */
+.ob-budget-ticks span:nth-child(4) { left: 57.4%; }                               /* $3000 */
+.ob-budget-ticks span:nth-child(5) { left: 78.7%; }                               /* $4000 */
+.ob-budget-ticks span:nth-child(6) { left: 100%;  transform: translateX(-100%); } /* $5000 */
+
+/* Tick marks on budget slider at each label position */
+.ob-budget-wrap .ob-slider-wrap::before,
+.ob-budget-wrap .ob-slider-wrap::after {
+  display: none; /* disable inherited defaults */
+}
+.ob-budget-wrap .ob-slider-wrap {
+  --tick-color: var(--accent);
+  --tick-opacity: 0.35;
+}
+
+.ob-budget-tick-marks {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+.ob-budget-tick-marks span {
+  position: absolute;
+  width: 2px;
+  height: 14px;
+  border-radius: 1px;
+  background: var(--accent);
+  opacity: 0.35;
+  transform: translate(-50%, -50%);
+}
+.ob-budget-tick-marks span:first-child { transform: translate(0, -50%); }
+.ob-budget-tick-marks span:last-child  { transform: translate(-100%, -50%); }
 
 /* Continue/Start button */
 .ob-next {
@@ -1398,4 +1464,48 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   background: var(--accent-dim);
   border-color: var(--accent);
   color: var(--accent);
+}
+/* ── 4-label slider — absolute positioning at zone midpoints ── */
+.ob-use-labels {
+  position: relative;
+  height: 2.2rem;
+  font-family: 'DM Mono', monospace;
+}
+.ob-use-labels span {
+  position: absolute;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+  transition: color 0.2s, font-weight 0.2s;
+  letter-spacing: 0.02em;
+}
+/* CPU Render — far left */
+.ob-use-labels span:nth-child(1) {
+  left: 5%;
+  font-size: 0.60rem;
+  color: var(--text-muted);
+  opacity: 0.55;
+}
+/* Productivity — center-left */
+.ob-use-labels span:nth-child(2) {
+  left: 25%;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+/* Gaming — right side, close to 3D Render */
+.ob-use-labels span:nth-child(3) {
+  left: 75%;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+/* 3D Render — far right */
+.ob-use-labels span:nth-child(4) {
+  left: 92%;
+  font-size: 0.60rem;
+  color: var(--text-muted);
+  opacity: 0.55;
 }

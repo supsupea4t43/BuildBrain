@@ -23,8 +23,8 @@ function checkCompatibility(item, type, build, components) {
       // If PSU selected, check TDP
       if (psu) {
         const gpuPwr = gpu ? gpu.power : 0;
-        if (item.power + gpuPwr + 50 > psu.wattage)
-          issues.push(`PSU ${psu.wattage}W too low (need ~${item.power + gpuPwr + 50}W)`);
+        if ((item.power + gpuPwr + 130) * 1.25 > psu.wattage)
+          issues.push(`PSU ${psu.wattage}W too low (need ~${Math.ceil((item.power + gpuPwr + 130) * 1.25)}W)`);
       }
       break;
 
@@ -35,8 +35,8 @@ function checkCompatibility(item, type, build, components) {
       // If PSU selected, check combined TDP
       if (psu) {
         const cpuPwr = cpu ? cpu.power : 0;
-        if (cpuPwr + item.power + 50 > psu.wattage)
-          issues.push(`PSU ${psu.wattage}W too low (need ~${cpuPwr + item.power + 50}W)`);
+        if ((cpuPwr + item.power + 130) * 1.25 > psu.wattage)
+          issues.push(`PSU ${psu.wattage}W too low (need ~${Math.ceil((cpuPwr + item.power + 130) * 1.25)}W)`);
       }
       break;
 
@@ -44,7 +44,7 @@ function checkCompatibility(item, type, build, components) {
       // Check wattage covers cpu + gpu + overhead
       const cpuPwr = cpu ? cpu.power : 0;
       const gpuPwr = gpu ? gpu.power : 0;
-      const needed = cpuPwr + gpuPwr + 50;
+      const needed = Math.ceil((cpuPwr + gpuPwr + 130) * 1.25);
       if (item.wattage < needed)
         issues.push(`Only ${item.wattage}W — need ~${needed}W`);
       // Check PSU form factor fits in case

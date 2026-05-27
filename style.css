@@ -986,7 +986,6 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--text);
 }
 .fps-preset {

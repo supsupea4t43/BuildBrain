@@ -607,7 +607,7 @@ function renderList(type) {
 // Normalize raw scores to 0–100 for display
 function normalizeScore(item, type) {
   if (item.score == null) return null;
-  if (type === 'cpu') return Math.min(100, (item.score / 60000) * 100);
+  if (type === 'cpu') return Math.min(100, (item.score / 66000) * 100);
   if (type === 'gpu') return Math.min(100, (item.score / 39000) * 100);
   return item.score;
 }
@@ -653,7 +653,7 @@ function updateFpsDisplay() {
 
   fpsWrap.innerHTML = `
     <div class="fps-game">
-      <span class="fps-game-name">CS:GO</span>
+      <span class="fps-game-name">Counter Strike 2</span>
       <span class="fps-preset">Max settings · ${prefs.resolution}p</span>
     </div>
     <div class="fps-number" style="color:${colour}">${fpsRound}</div>
